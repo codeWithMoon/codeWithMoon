@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Linking, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Linking, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Teacher() {
@@ -33,7 +33,7 @@ export default function Teacher() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}></View>
       <Image
         style={styles.avatar}
@@ -54,7 +54,7 @@ export default function Teacher() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 

@@ -1,35 +1,30 @@
-import { View, Text, Image, StyleSheet, FlatList } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useLocalSearchParams } from 'expo-router';
+import { View, Text, StyleSheet, FlatList, Image, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
-export default function ClassDetails() {
-    const { classSubject } = useLocalSearchParams();
+export default function classStudents() {
 
-    const [classStudents, setClassStudens] = useState()
+    const [students, setStudents] = useState([]);
 
     useEffect(() => {
-        fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/class_students?subject=${classSubject}`).then(res => res.json()).then(json => setClassStudens(json)).catch(err => console.log(err));
+        fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/get_all_students`).then(res => res.json()).then(json => setStudents(json)).catch(err => console.log(err));
     }, []);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Class: {classSubject}</Text>
-            <FlatList data={classStudents} keyExtractor={item => item._id} renderItem={({ item }) => <View style={styles.account}>
+        <ScrollView style={styles.container}>
+            <Text style={styles.title} >Students</Text>
+            <FlatList data={students} keyExtractor={item => item._id} renderItem={({ item }) => <View style={styles.account}>
                 <Image style={styles.accountImage} source={{ uri: 'https://www.bootdey.com/img/Content/avatar/avatar6.png' }} />
                 <View style={styles.accountContent}>
                     <Text style={styles.accountName}>{item.name}</Text>
                     <Text style={styles.accountBalance}>{item.subject}</Text>
                 </View>
             </View>} />
-        </View>
-    );
+        </ScrollView>
+    )
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "flex-start",
         marginTop: 60,
         padding: 20,
     },
@@ -60,4 +55,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#999',
     },
-});
+})

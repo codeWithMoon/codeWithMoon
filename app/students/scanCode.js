@@ -35,12 +35,13 @@ export default function ScanCode() {
     try {
       const res = await fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/attendance?classId=${data._id}&studentId=${agent._id}`);
       const json = await res.json();
-      Alert.alert(json.msg);
+      alert(json.msg);
     } catch (error) {
       console.log(error);
     } finally {
       router.push('/students/student');
     }
+    alert(`Bar code with type ${type} and data ${data} has been scanned`);
   };
 
   //const getAttendance = async (newData)=>{  }

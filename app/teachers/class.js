@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Button, Alert, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Class() {
@@ -40,8 +40,8 @@ export default function Class() {
   }
 
   return (
-    <View style={styles.container}>
-      <View >
+    <ScrollView style={styles.container}>
+      <View style={styles.buttonBox} >
         <TouchableOpacity style={styles.linkContainer} onPress={() => router.push("/AddClass")} >
           <Text style={styles.buttonText} >Create Class</Text>
         </TouchableOpacity>
@@ -56,8 +56,8 @@ export default function Class() {
           return (
             <View style={styles.content}>
               <View style={styles.contentHeader}>
-                <Text style={styles.name}>Class: {item.classGrade}</Text>
-                <Text style={styles.time}>Created Date: {new Date(item.date).toDateString()}</Text>
+                <Text style={styles.name}>Semester: {item.classGrade}</Text>
+                <Text style={styles.time}>Created Date: {new Date(item.date).toDateString()} at {new Date(item.date).toLocaleTimeString()}</Text>
               </View>
               <View style={{ flex: 1 }} >
                 <Text>Subject: {item.classSubject}</Text>
@@ -71,7 +71,7 @@ export default function Class() {
           )
         }} />
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -85,9 +85,7 @@ const styles = StyleSheet.create({
     paddingLeft: 19,
     paddingRight: 16,
     paddingVertical: 12,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: 'column'
   },
   content: {
     margin: 16,
@@ -138,5 +136,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 5,
     paddingVertical: 10
+  },
+  buttonBox: {
+    justifyContent: "center",
+    alignItems: "center",
   }
 });

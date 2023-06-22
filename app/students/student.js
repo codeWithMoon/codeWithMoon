@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Linking, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Linking, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 
@@ -33,7 +33,7 @@ export default function Student() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}></View>
       <Image
         style={styles.avatar}
@@ -47,7 +47,7 @@ export default function Student() {
           </Text>
           <Text style={styles.description}>Status: {agent.statusAs}</Text>
         </View >
-        <View style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }} >
+        <View style={styles.buttonBox} >
           <TouchableOpacity style={styles.customButtonContainer} onPress={() => Linking.openURL('https://docs.google.com/spreadsheets/d/182309nUHd37XNhVQr8JnH0Blb5DDTxi0RaANzU3CL6w/edit#gid=0')} >
             <Text style={styles.buttonText} >Check your Schedule</Text>
           </TouchableOpacity>
@@ -56,11 +56,14 @@ export default function Student() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10
+  },
   header: {
     backgroundColor: 'yellowgreen',
     height: 200,
@@ -119,6 +122,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#fff",
     fontWeight: "bold",
+  },
+  buttonBox: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center"
   },
   linkContainer: {
     fontSize: 18,

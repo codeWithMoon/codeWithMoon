@@ -1,29 +1,35 @@
 import { View, Text, ScrollView, StyleSheet, Button, TextInput, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dropdown } from 'react-native-element-dropdown';
-import { AntDesign } from '@expo/vector-icons';
 
 export default function SingUp() {
   const router = useRouter();
 
   const classGradeData = [
-    { label: '9th', value: '09' },
-    { label: '10th', value: '10' },
-    { label: '11th', value: '11' },
-    { label: '12th', value: '12' }
+    { label: 'Semester 1', value: '01' },
+    { label: 'Semester 2', value: '02' },
+    { label: 'Semester 3', value: '03' },
+    { label: 'Semester 4', value: '04' },
+    { label: 'Semester 5', value: '05' },
+    { label: 'Semester 6', value: '06' },
+    { label: 'Semester 7', value: '07' },
+    { label: 'Semester 8', value: '08' }
   ];
 
   const classSubjectData = [
-    { label: 'Math', value: 'Math' },
-    { label: 'Scince', value: 'Scince' },
+    { label: 'DataBase', value: 'DataBase' },
+    { label: 'Java', value: 'Java' },
     { label: 'Physics', value: 'Physics' },
-    { label: 'Islamic Studies', value: 'Islamic Studies' }
+    { label: 'AI', value: 'AI' },
+    { label: 'Algebra', value: 'Algebra' },
+    { label: 'DLD', value: 'DLD' },
+    { label: 'Discrete Structure', value: 'Discrete Structure' },
+    { label: 'Automata', value: 'Automata' }
   ];
+  
   const [agent, setAgent] = useState({});
-  const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { classGrade: "", classSubject: "", } });
   const [classGrade, SetClassGrade] = useState("");
   const [classSubject, setClassSubject] = useState("");
   const [isFocus, setIsFocus] = useState(false);
@@ -146,65 +152,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-
-/**<ScrollView contentContainerStyle={{ paddingTop: 50, paddingHorizontal: 20 }}>
-      <Text style={{ fontSize: 18, marginVertical: 10 }}>Register your details here</Text>
-      <Controller control={control} name="classGrade" rules={{ required: "Class Grade is Requied", minLength: { value: 2, message: "Must be 2 Character Long" }, maxLength: { value: 32, message: "Should not be longer the 34 Charater" } }} render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => <View><TextInput style={[style.input, { borderColor: error ? "red" : "#000" }]} value={value} onChangeText={onChange} onBlur={onBlur} placeholder='Class Grade' />{error && <Text style={style.errorStyle} >{error.message}</Text>}</View>} />
-      <Controller control={control} name="classSubject" rules={{ required: "Subject for Class is Requied", minLength: { value: 3, message: "Must be 3 Character Long" }, maxLength: { value: 32, message: "Should not be longer the 34 Charater" } }} render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => <View><TextInput style={[style.input, { borderColor: error ? "red" : "#000" }]} value={value} onChangeText={onChange} onBlur={onBlur} placeholder='Subject of Class' />{error && <Text style={style.errorStyle} >{error.message}</Text>}</View>} />
-      
-
-      <View style={style.ButtonStyle} >
-        <Button title='Create' onPress={handleSubmit(CreateClass)} color="yellowgreen" />
-      </View>
-      <View style={style.ButtonStyle}>
-        <Button title='cancle' onPress={() => router.back()} color="yellowgreen" />
-      </View>
-    </ScrollView> 
-    
-    <View style={style.pickerContainer}>
-      <Picker ref={pickerRef} style={{ height: 50, width: 200 }} onValueChange={(itemValue, itemIndex) => setInputValue({ classSubject: itemValue })}>
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
-      </Picker>
-    </View>
-
-    container: {
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 16,
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-  errorStyle: {
-    color: "red",
-    fontSize: 12,
-    fontWeight: "bold",
-    marginHorizontal: 12
-  },
-  subButton: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 5
-  },
-  ButtonView: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between"
-  },
-  ButtonStyle: {
-    marginVertical: 5,
-  },
-  pickerContainer: {
-    flex: 1,
-    width: "auto",
-    paddingTop: 40,
-    alignItems: "center"
-  }
-});
-    */

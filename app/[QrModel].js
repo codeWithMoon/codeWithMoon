@@ -19,8 +19,8 @@ export default function QrCode() {
 
   return (
     <View style={styles.container} >
-      <View style={styles.container}>
-        <Text style={styles.subtitle} >Qr Code for Attandance for Class {classGrade}</Text>
+      <View style={styles.container}> 
+        <Text style={styles.subtitle} >Qr Code for Attandance for Semester {classGrade}</Text>
         <QRCode value={qrValue ? qrValue : "NA"} size={290} color='#000' backgroundColor='white' ></QRCode>
       </View>
     </View>

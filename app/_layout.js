@@ -9,5 +9,6 @@ export default function () {
         <Stack.Screen name="[QrModel]" options={{ presentation: "modal", title: "Qr Code" }} />
         <Stack.Screen name="AddClass" options={{ presentation: "modal", title: "Create A Class" }} />
         <Stack.Screen name="classDetails" options={{ presentation: "modal", title: "Class Details" }} />
+        <Stack.Screen name="createStudent" options={{ presentation: "modal", title: "Create Student" }} />
     </Stack>
 }
