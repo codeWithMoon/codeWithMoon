@@ -18,7 +18,9 @@ export default function Class() {
       } catch (error) {
         console.log(error);
       } finally {
-        fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/teacher_classes?teacherId=${agent._id}`).then(res => res.json()).then(json => setClasses(json)).catch(err => console.error(err));
+        let res = await fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/teacher_classes?teacherId=${agent._id}`);
+        let json = await res.json();
+        setClasses(json);
       };
     })();
   }, []);
@@ -36,7 +38,7 @@ export default function Class() {
     }).then(res => res.json()).then(json => {
       Alert.alert(json.msg);
       setClasses(classes.filter(item => item._id !== id));
-    }).catch(err => console.log(err));
+    }).catch(err => console.error(err));
   }
 
   return (
@@ -65,7 +67,7 @@ export default function Class() {
               <View style={styles.fixToText} >
                 <Button title="delete" onPress={() => deleteClass(item._id)} color="red" />
                 <Button title="Qr Code" onPress={() => router.push({ pathname: "/[QrModal]", params: { id: item._id, classGrade: item.classGrade, classSubject: item.classSubject } })} />
-                <Button title="Detils" onPress={() => router.push({ pathname: "/classDetails", params: { classGrade: item.classGrade, classSubject: item.classSubject } })} color="yellowgreen" />
+                <Button title="Detils" onPress={() => router.push({ pathname: "/classDetails", params: { id: item._id, classGrade: item.classGrade, classSubject: item.classSubject } })} color="yellowgreen" />
               </View>
             </View>
           )

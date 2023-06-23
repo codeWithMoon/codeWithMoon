@@ -31,9 +31,8 @@ export default function ScanCode() {
 
   const handleScanned = async ({ type, data }) => {
     setScanned(true);
-    //getAttendance(data);
     try {
-      const res = await fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/attendance?classId=${data._id}&studentId=${agent._id}`);
+      const res = await fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/attendance?studentId=${agent._id}&${data}`);
       const json = await res.json();
       alert(json.msg);
     } catch (error) {
@@ -43,8 +42,6 @@ export default function ScanCode() {
     }
     alert(`Bar code with type ${type} and data ${data} has been scanned`);
   };
-
-  //const getAttendance = async (newData)=>{  }
 
   if (hasPermission === null) {
     return <Text>Request for Camera Permission</Text>;

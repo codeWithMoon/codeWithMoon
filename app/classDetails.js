@@ -3,12 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 
 export default function ClassDetails() {
-    const { classSubject } = useLocalSearchParams();
+    const { id, classSubject } = useLocalSearchParams();
 
-    const [classStudents, setClassStudens] = useState()
+    const [classStudents, setClassStudens] = useState([]);
+    console.log(classStudents);
 
     useEffect(() => {
-        fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/class_students?subject=${classSubject}`).then(res => res.json()).then(json => setClassStudens(json)).catch(err => console.log(err));
+        fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/get_class_details?classId=${id}`).then(res => res.json()).then(json => {
+            let studentArr = json.students;
+            studentArr.map(student => {
+                fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/attendanced_students?userId=${student}`).then(res => res.json()).then(json => setClassStudens(item => [...item, json])).catch(err => console.log(err));
+            })
+        }).catch(err => console.log(err));
     }, []);
 
     return (
@@ -19,6 +25,7 @@ export default function ClassDetails() {
                 <View style={styles.accountContent}>
                     <Text style={styles.accountName}>{item.name}</Text>
                     <Text style={styles.accountBalance}>{item.subject}</Text>
+                    <Text style={styles.accountBalance}>Marked his Attendance</Text>
                 </View>
             </View>} />
         </View>
@@ -61,3 +68,5 @@ const styles = StyleSheet.create({
         color: '#999',
     },
 });
+
+/**fetch(`https://data.mongodb-api.com/app/application-0-tcqor/endpoint/class_students?subject=${classSubject}`).then(res => res.json()).then(json => setClassStudens(json)).catch(err => console.log(err)); */

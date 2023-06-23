@@ -10,7 +10,7 @@ export default function QrCode() {
 
   useEffect(() => {
     if (id && classGrade && classSubject) {
-      setQrValue(`_id=${id}&classGrade=${classGrade}&classSubject=${classSubject}`)
+      setQrValue(`classId=${id}&classGrade=${classGrade}&classSubject=${classSubject}`)
     } else {
       alert("Something went wrong");
       router.replace("/teachers/classes");
